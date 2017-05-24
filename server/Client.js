@@ -8,8 +8,8 @@
 
 let counter = 0
 
-module.exports = class Client{
-    constructor(socket,id){
+module.exports = class Client {
+    constructor(socket, id) {
         this.id = id
         this.socket = socket
         this.name = 'anonymous'
@@ -18,11 +18,11 @@ module.exports = class Client{
         this.groups = {}
     }
 
-    disconnect(){
+    disconnect() {
         this.connected = false
     }
 
-    isInGroup(name){
+    isInGroup(name) {
         return this.groups.hasOwnProperty(name)
     }
 }

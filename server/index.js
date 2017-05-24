@@ -1,4 +1,4 @@
-    /**
+/**
  * 24.05.2017
  * TCP Chat using NodeJS
  * https://github.com/PatrikValkovic/TCPChat
@@ -13,25 +13,24 @@ const GroupManager = require('./GroupManager')
 const Parser = require('./Parser')
 const Client = require('./Client')
 
-if(require.main === module)
-{
+if (require.main === module) {
     let counter = 10
     const grpManager = new GroupManager(config.defaultGroups)
     const parser = new Parser(grpManager)
     const server = net.createServer()
 
-    server.on('connection',(socket) => {
-        const client = new Client(socket,counter++)
-        socket.on('close',()=>{
+    server.on('connection', (socket) => {
+        const client = new Client(socket, counter++)
+        socket.on('close', () => {
             log.info('Socket ended')
             client.disconnect()
         })
-        socket.on('data',(cont)=>{
+        socket.on('data', (cont) => {
             parser.parse(socket, client, cont.toString())
         })
     })
 
-    server.listen(config.port,config.host,()=>{
+    server.listen(config.port, config.host, () => {
         const address = server.address()
         log.info(`Server running on ${address.address}:${address.port}`)
     })

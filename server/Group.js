@@ -22,7 +22,7 @@ module.exports = class Group {
         const index = this.__clients.findIndex((c) => {
             return client.id === c.id
         })
-        if(index < 0)
+        if (index < 0)
             return false
 
         let oldArraySize = this.__clients.length
@@ -31,9 +31,10 @@ module.exports = class Group {
         return oldArraySize !== this.__clients.length
     }
 
-    send(fromClient, message){
+    send(fromClient, message) {
         const mess = `[${this.name}]\t<${fromClient.name}>\t${message}`
-        for(let i in this.__clients)
-            this.__clients[i].socket.write(mess)
+        for (let i in this.__clients)
+            if (this.__clients[i].id !== fromClient.id)
+                this.__clients[i].socket.write(mess)
     }
 }

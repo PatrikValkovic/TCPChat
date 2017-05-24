@@ -21,6 +21,7 @@ if (require.main === module) {
 
     server.on('connection', (socket) => {
         const client = new Client(socket, counter++)
+        log.info('Client connected')
         socket.on('close', () => {
             log.info('Socket ended')
             client.disconnect()

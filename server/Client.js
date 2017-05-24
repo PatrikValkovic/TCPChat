@@ -11,9 +11,10 @@ module.exports = class Client{
         this.id = id
         this.socket = socket
         this.name = 'anonymous'
+        this.connected = true
     }
 
     disconnect(){
-
+        this.connected = false
     }
 }

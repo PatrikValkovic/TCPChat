@@ -13,11 +13,11 @@ module.exports = class GroupManager
 {
     constructor(groups){
         this.__groups = []
-        for(let g in groups)
-            this.__groups.push(new Group(g))
+        for(const i in groups)
+            this.__groups.push(new Group(groups[i]))
     }
 
-    getGroups(){
+    getGroupsNames(){
         return this.__groups.map((g)=>{
             return g.name
         })

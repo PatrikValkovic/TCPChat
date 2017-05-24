@@ -17,7 +17,8 @@ module.exports = class Parser
     parse(socket, content){
         let ret = ''
         if(content.startsWith('/groups')){
-            const groups = this.manager.getGroups()
+            ret += 'List of groups:\n'
+            const groups = this.manager.getGroupsNames()
             for(let i=0;i<groups.length;i++)
                 ret += `/${i} ${groups[i]}\n`
             socket.write(ret)

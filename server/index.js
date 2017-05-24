@@ -27,7 +27,7 @@ if (require.main === module) {
             client.disconnect()
         })
         socket.on('data', (cont) => {
-            parser.parse(socket, client, cont.toString())
+            parser.parse(client, cont.toString())
         })
         socket.on('error', () => {
             log.warning('Error with socket')

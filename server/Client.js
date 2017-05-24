@@ -8,6 +8,10 @@
 
 let counter = 0
 
+/**
+ * Represent connected client
+ * @type {Client}
+ */
 module.exports = class Client {
     constructor(socket, id) {
         this.id = id
@@ -18,10 +22,18 @@ module.exports = class Client {
         this.groups = {}
     }
 
+    /**
+     * Disconnect client from server
+     */
     disconnect() {
         this.connected = false
     }
 
+    /**
+     * Check, if is user in specific group
+     * @param {string} name Name of group to check
+     * @returns {boolean} True if is user in group, false otherwise
+     */
     isInGroup(name) {
         return this.groups.hasOwnProperty(name)
     }

@@ -6,18 +6,37 @@
  */
 'use strict'
 
+/**
+ * Class that represent chat group
+ * @type {Group}
+ */
 module.exports = class Group {
+
+    /**
+     * Constructor
+     * @param {string} name Name of group
+     * @param {int} index Short index for group
+     */
     constructor(name, index) {
         this.name = name
         this.__clients = []
         this.index = index
     }
 
+    /**
+     * Add client into group
+     * @param {Client} client
+     */
     addClient(client) {
         this.__clients.push(client)
         client.groups[this.name] = this.index
     }
 
+    /**
+     * Remove client from group
+     * @param {Client} client Client to remove
+     * @returns {boolean} True if was client removed, false otherwise
+     */
     removeClient(client) {
         const index = this.__clients.findIndex((c) => {
             return client.id === c.id
@@ -31,6 +50,11 @@ module.exports = class Group {
         return oldArraySize !== this.__clients.length
     }
 
+    /**
+     * Send message to group
+     * @param {Client} fromClient Client, that send message
+     * @param {string} message Message to send
+     */
     send(fromClient, message) {
         const mess = `[${this.name}]\t<${fromClient.name}>\t${message}`
         this.__clients = this.__clients.filter((c)=>{

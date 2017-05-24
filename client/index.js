@@ -26,7 +26,7 @@ if (require.main === module) {
             }
         })
         socket.on('data',(content) => {
-            console.log(content.toString())
+            process.stdout.write(content.toString())
         })
         socket.write(`/setname ${name}`)
     }

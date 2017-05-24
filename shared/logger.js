@@ -6,14 +6,14 @@
  */
 'use strict'
 
-export class Logger {
+module.exports = {
     info(message){
         console.info(`${Date.now().toString()}\tINFO: ${message}`)
-    }
+    },
     warning(message){
         console.warn(`${Date.now().toString()}\tWARN: ${message}`)
-    }
+    },
     error(message){
         console.error(`${Date.now().toString()}\tERRO: ${message}`)
-    }
+    },
 }

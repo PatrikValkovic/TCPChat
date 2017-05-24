@@ -27,7 +27,7 @@ if(require.main === module)
             client.disconnect()
         })
         socket.on('data',(cont)=>{
-            parser.parse(socket, cont.toString())
+            parser.parse(socket, client, cont.toString())
         })
     })
 

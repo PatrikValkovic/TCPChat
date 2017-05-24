@@ -6,6 +6,7 @@
  */
 'use strict'
 
+const net = require('net')
 const log = require('../shared/logger')
 
 module.exports = class Parser
@@ -14,7 +15,12 @@ module.exports = class Parser
         this.manager = manager
     }
 
-    parse(socket, content){
+    /**
+     *
+     * @param {net.Socket} socket
+     * @param {string} content
+     */
+    parse(socket, client, content){
         let ret = ''
         if(content.startsWith('/groups')){
             ret += 'List of groups:\n'
@@ -28,7 +34,20 @@ module.exports = class Parser
             socket.destroy()
         }
         if(content.startsWith('/join')){
-
+            const splitted = content.split(' ');
+            if(splitted.length !== 2){
+                socket.write('Invalid syntax: /join <groupName|groupId>\n')
+                return
+            }
+            const grp = isNaN(parseInt(splitted[1])) ?
+                this.manager.getGroupByName(splitted[1].trim()) :
+                this.manager.getGroupByIndex(parseInt(splitted[1]))
+            if(grp === null){
+                socket.write('Non existing group, try /groups to list all groups\n')
+                return
+            }
+            grp.addClient(client)
+            socket.write(`Joined ${grp.name} group\n`)
         }
     }
 }

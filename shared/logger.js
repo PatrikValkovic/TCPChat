@@ -6,14 +6,20 @@
  */
 'use strict'
 
+const now = () => {
+    const now = new Date()
+    //TODO replace with format string
+    return `${now.getFullYear()}/${now.getMonth()}/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
+}
+
 module.exports = {
     info(message){
-        console.info(`${Date.now().toString()}\tINFO: ${message}`)
+        console.info(`${now()}\tINFO: ${message}`)
     },
     warning(message){
-        console.warn(`${Date.now().toString()}\tWARN: ${message}`)
+        console.warn(`${now()}\tWARN: ${message}`)
     },
     error(message){
-        console.error(`${Date.now().toString()}\tERRO: ${message}`)
+        console.error(`${now() }\tERRO: ${message}`)
     },
 }

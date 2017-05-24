@@ -9,6 +9,11 @@
 module.exports = class Group
 {
     constructor(name){
-        this.__name = name
+        this.name = name
+        this.__clients = []
+    }
+
+    addClient(client){
+        this.__clients.push(client)
     }
 }

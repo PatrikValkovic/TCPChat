@@ -9,7 +9,7 @@ Client can connect with client part of application (`node client`) or simple usi
 
 Application support sending of messages and separate chat groups.
 
-Made by Patrik Valkovič
+Made by Patrik Valkovič  
 2017/05/24
 
 MIT licence

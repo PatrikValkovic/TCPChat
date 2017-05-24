@@ -27,5 +27,8 @@ module.exports = class Parser
             log.info('Client exiting')
             socket.destroy()
         }
+        if(content.startsWith('/join')){
+
+        }
     }
 }

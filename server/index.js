@@ -10,12 +10,14 @@ const net = require('net')
 const Log = require('../shared/logger')
 const config = require('../config.json')
 const GroupManager = require('./GroupManager')
+const Parser = require('./Parser')
 const Client = require('./Client')
 
 if(require.main === module)
 {
     let counter = 10
     const grpManager = new GroupManager(config.defaultGroups)
+    const parser = new Parser(grpManager)
     const server = net.createServer()
 
     server.on('connection',(socket) => {
@@ -24,8 +26,7 @@ if(require.main === module)
             client.disconnect()
         })
         socket.on('data',(cont)=>{
-            const req = JSON.parse(cont.toString())
-            console.log(cont)
+            parser.parse(cont.toString())
         })
     })
 

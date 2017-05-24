@@ -6,7 +6,14 @@
  */
 'use strict'
 
-export class GroupManager
+const Group = require('./Group')
+
+
+module.exports = class GroupManager
 {
-    private groups = []
+    constructor(groups){
+        this.__groups = []
+        for(let g in groups)
+            this.__groups.push(new Group(g))
+    }
 }

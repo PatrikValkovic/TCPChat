@@ -9,9 +9,12 @@
 const net = require('net')
 const Log = require('../shared/logger')
 const config = require('../config.json')
+const GroupManager = require('./GroupManager')
 
 if(require.main === module)
 {
+    const grpManager = new GroupManager(config.defaultGroups)
+
     const server = net.createServer()
 
     server.on('connection',(socket) => {

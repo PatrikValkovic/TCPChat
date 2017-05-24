@@ -6,7 +6,9 @@
  */
 'use strict'
 
-export class Group
+module.exports = class Group
 {
-
+    constructor(name){
+        this.__name = name
+    }
 }

@@ -21,4 +21,8 @@ module.exports = class Client{
     disconnect(){
         this.connected = false
     }
+
+    isInGroup(name){
+        return this.groups.hasOwnProperty(name)
+    }
 }

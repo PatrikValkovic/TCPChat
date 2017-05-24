@@ -13,12 +13,26 @@ const now = () => {
 }
 
 module.exports = {
+    /**
+     * Log info message
+     * @param {string} message
+     */
     info(message){
         console.info(`${now()}\tINFO: ${message}`)
     },
+
+    /**
+     * Log waring message
+     * @param {string} message
+     */
     warning(message){
         console.warn(`${now()}\tWARN: ${message}`)
     },
+
+    /**
+     * Log error message
+     * @param {string} message
+     */
     error(message){
         console.error(`${now() }\tERRO: ${message}`)
     },

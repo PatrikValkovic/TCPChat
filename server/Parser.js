@@ -81,5 +81,16 @@ module.exports = class Parser
             else
                 socket.write(`You are not in ${grp.name} group\n`)
         }
+
+        else if(content.startsWith('/create')){
+            const splitted = content.split(' ');
+            if(splitted.length !== 2){
+                socket.write('Invalid syntax: /create <groupName>\n')
+                return
+            }
+            const grp = this.manager.createGroup(splitted[1].trim());
+            grp.addClient(client)
+            socket.write(`You are now in ${grp.name} group\n`)
+        }
     }
 }

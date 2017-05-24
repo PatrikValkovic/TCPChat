@@ -40,7 +40,7 @@ module.exports = class GroupManager
     }
 
     createGroup(groupName){
-        const exists = this.getGroupByName()
+        const exists = this.getGroupByName(groupName)
         if(exists === null){
             const g = new Group(groupName)
             this.__groups.push(g)

@@ -33,6 +33,9 @@ module.exports = class Group {
 
     send(fromClient, message) {
         const mess = `[${this.name}]\t<${fromClient.name}>\t${message}`
+        this.__clients = this.__clients.filter((c)=>{
+            return c.connected === true
+        })
         for (let i in this.__clients)
             if (this.__clients[i].id !== fromClient.id)
                 this.__clients[i].socket.write(mess)

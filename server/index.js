@@ -29,6 +29,10 @@ if (require.main === module) {
         socket.on('data', (cont) => {
             parser.parse(socket, client, cont.toString())
         })
+        socket.on('error', () => {
+            log.warning('Error with socket')
+            client.disconnect()
+        })
     })
 
     server.listen(config.port, config.host, () => {

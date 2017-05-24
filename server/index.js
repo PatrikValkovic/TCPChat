@@ -7,7 +7,7 @@
 'use strict'
 
 const net = require('net')
-const Log = require('../shared/logger')
+const log = require('../shared/logger')
 const config = require('../config.json')
 const GroupManager = require('./GroupManager')
 const Parser = require('./Parser')
@@ -22,16 +22,17 @@ if(require.main === module)
 
     server.on('connection',(socket) => {
         const client = new Client(socket,counter++)
-        socket.on('end',()=>{
+        socket.on('close',()=>{
+            log.info('Socket ended')
             client.disconnect()
         })
         socket.on('data',(cont)=>{
-            parser.parse(cont.toString())
+            parser.parse(socket, cont.toString())
         })
     })
 
     server.listen(config.port,config.host,()=>{
         const address = server.address()
-        Log.info(`Server running on ${address.address}:${address.port}`)
+        log.info(`Server running on ${address.address}:${address.port}`)
     })
 }

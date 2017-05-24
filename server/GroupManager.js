@@ -16,4 +16,10 @@ module.exports = class GroupManager
         for(let g in groups)
             this.__groups.push(new Group(g))
     }
+
+    getGroups(){
+        return this.__groups.map((g)=>{
+            return g.name
+        })
+    }
 }

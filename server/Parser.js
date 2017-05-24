@@ -66,6 +66,16 @@ module.exports = class Parser
         }
 
 
+        else if(content.startsWith('/setname')){
+            const splitted = content.split(' ');
+            if(splitted.length !== 2){
+                socket.write('Invalid syntax: /setname <yourName>\n')
+                return
+            }
+            client.name = splitted[1].trim()
+        }
+
+
         else if(content.startsWith('/leave')){
             const splitted = content.split(' ');
             if(splitted.length !== 2){
@@ -95,6 +105,8 @@ module.exports = class Parser
             grp.addClient(client)
             socket.write(`You are now in ${grp.name} group\n`)
         }
+
+        //message
         else if(content.startsWith('/')){
             const grpId = content.split(' ')[0].substr(1);
             if(isNaN(parseInt(grpId))){

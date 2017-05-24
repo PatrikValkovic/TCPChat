@@ -21,19 +21,30 @@ module.exports = class Parser
      * @param {string} content
      */
     parse(socket, client, content){
-        let ret = ''
+
         if(content.startsWith('/groups')){
-            ret += 'List of groups:\n'
+            socket.write('List of groups:\n')
             const groups = this.manager.getGroupsNames()
             for(let i=0;i<groups.length;i++)
-                ret += `/${i} ${groups[i]}\n`
-            socket.write(ret)
+                socket.write(`/${i} ${groups[i]}\n`)
         }
-        if(content.startsWith('/exit')){
+
+
+        else if(content.startsWith('/exit')){
             log.info('Client exiting')
             socket.destroy()
         }
-        if(content.startsWith('/join')){
+
+
+        else if(content.startsWith('/joined')){
+            for(const grp in client.groups)
+                    socket.write(`${grp}\n`)
+            if(Object.keys(client.groups).length === 0)
+                socket.write('You are not in any group\n')
+        }
+
+
+        else if(content.startsWith('/join')){
             const splitted = content.split(' ');
             if(splitted.length !== 2){
                 socket.write('Invalid syntax: /join <groupName|groupId>\n')
@@ -50,7 +61,9 @@ module.exports = class Parser
 
             socket.write(`Joined ${grp.name} group\n`)
         }
-        if(content.startsWith('/leave')){
+
+
+        else if(content.startsWith('/leave')){
             const splitted = content.split(' ');
             if(splitted.length !== 2){
                 socket.write('Invalid syntax: /leave <groupName|groupId>\n')
@@ -67,9 +80,6 @@ module.exports = class Parser
                 socket.write(`Leaved ${grp.name} group\n`)
             else
                 socket.write(`You are not in ${grp.name} group\n`)
-        }
-        if(content.startsWith('/joined')){
-
         }
     }
 }

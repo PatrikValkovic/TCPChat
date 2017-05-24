@@ -7,14 +7,15 @@
 'use strict'
 
 module.exports = class Group {
-    constructor(name) {
+    constructor(name, index) {
         this.name = name
         this.__clients = []
+        this.index = index
     }
 
     addClient(client) {
         this.__clients.push(client)
-        client.groups[this.name] = 1
+        client.groups[this.name] = this.index
     }
 
     removeClient(client) {

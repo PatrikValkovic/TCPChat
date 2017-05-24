@@ -37,10 +37,13 @@ module.exports = class Parser
 
 
         else if(content.startsWith('/joined')){
-            for(const grp in client.groups)
-                    socket.write(`${grp}\n`)
-            if(Object.keys(client.groups).length === 0)
+            if(Object.keys(client.groups).length === 0) {
                 socket.write('You are not in any group\n')
+                return
+            }
+            socket.write('List of groups\n')
+            for(const grp in client.groups)
+                    socket.write(`/${client.groups[grp]} ${grp}\n`)
         }
 
 

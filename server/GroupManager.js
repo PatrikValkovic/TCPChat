@@ -15,7 +15,7 @@ module.exports = class GroupManager
     constructor(groups){
         this.__groups = []
         for(const i in groups)
-            this.__groups.push(new Group(groups[i]))
+            this.__groups.push(new Group(groups[i],this.__groups.length))
     }
 
     getGroupsNames(){
@@ -42,7 +42,7 @@ module.exports = class GroupManager
     createGroup(groupName){
         const exists = this.getGroupByName(groupName)
         if(exists === null){
-            const g = new Group(groupName)
+            const g = new Group(groupName,this.__groups.length)
             this.__groups.push(g)
             return g
         }

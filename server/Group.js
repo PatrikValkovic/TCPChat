@@ -30,4 +30,10 @@ module.exports = class Group {
         delete client.groups[this.name]
         return oldArraySize !== this.__clients.length
     }
+
+    send(fromClient, message){
+        const mess = `[${this.name}]\t<${fromClient.name}>\t${message}`
+        for(let i in this.__clients)
+            this.__clients[i].socket.write(mess)
+    }
 }

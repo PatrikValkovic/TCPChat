@@ -95,5 +95,21 @@ module.exports = class Parser
             grp.addClient(client)
             socket.write(`You are now in ${grp.name} group\n`)
         }
+        else if(content.startsWith('/')){
+            const grpId = content.split(' ')[0].substr(1);
+            if(isNaN(parseInt(grpId))){
+                socket.write('Invalid syntax "/<groupId> <message>"')
+                return
+            }
+            const grp = this.manager.getGroupByIndex(grpId)
+            if(grp === null){
+                socket.write('Non existing group, try /joined command')
+                return
+            }
+            grp.send(client,content.substr(2+grpId.toString().length))
+        }
+        else{
+
+        }
     }
 }

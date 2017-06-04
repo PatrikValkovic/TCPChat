@@ -17,7 +17,6 @@ module.exports = class Group {
     /**
      * Constructor
      * @param {string} name Name of group
-     * @param {int} index Short index for group
      */
     constructor(name) {
         this.name = name
@@ -30,8 +29,8 @@ module.exports = class Group {
      * @param {Client} client
      */
     addClient(client) {
-        this.__clients.push(client)
-        client.groups[this.name] = this.index
+        this.__clients[client.id.toString()] = client
+        client.groups[this.id.toString()] = this
     }
 
     /**
@@ -40,16 +39,12 @@ module.exports = class Group {
      * @returns {boolean} True if was client removed, false otherwise
      */
     removeClient(client) {
-        const index = this.__clients.findIndex((c) => {
-            return client.id === c.id
-        })
-        if (index < 0)
+        if(this.__clients[client.id.toString()].id !== client.id)
             return false
 
-        let oldArraySize = this.__clients.length
-        this.__clients.splice(index, 1)
-        delete client.groups[this.name]
-        return oldArraySize !== this.__clients.length
+        delete client.groups[this.id.toString()]
+        delete this.__clients[client.id.toString()]
+        return true;
     }
 
     /**
@@ -59,10 +54,8 @@ module.exports = class Group {
      */
     send(fromClient, message) {
         const mess = `[${this.name}]\t<${fromClient.name}>\t${message}`
-        this.__clients = this.__clients.filter((c)=>{
-            return c.connected === true
-        })
-        for (let i in this.__clients)
+
+        for (let i of Object.keys(this.__clients))
             if (this.__clients[i].id !== fromClient.id)
                 this.__clients[i].socket.write(mess)
     }

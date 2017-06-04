@@ -27,9 +27,14 @@ class GroupManager {
      * @returns {Array}
      */
     getGroupsNames() {
-        return this.__groups.map((g) => {
-            return g.name
+        const arr = []
+        const gr = this.__groups
+        Object.keys(gr).forEach((k) => {
+            while(arr.length < gr[k].id)
+                arr.push(null)
+            arr[gr[k].id] = gr[k].name
         })
+        return arr
     }
 
     /**
@@ -38,7 +43,7 @@ class GroupManager {
      * @returns {Group|null} Instance of Group, null if group does not exists
      */
     getGroupByName(name) {
-        for (let i in this.__groups)
+        for (let i in Object.keys(this.__groups))
             if (this.__groups[i].name === name)
                 return this.__groups[i]
         log.warning(`Attempt to access ${name} group`)
@@ -51,10 +56,11 @@ class GroupManager {
      * @returns {Group|null} Instance of Group, null if group does not exists
      */
     getGroupByIndex(index) {
-        if (index >= 0 && index < this.__groups.length)
-            return this.__groups[index]
-        log.warning(`Attempt to get group with index ${index}, maximum is ${this.__groups.length - 1}`)
-        return null
+        if (!this.__groups.hasOwnProperty(index.toString())){
+            log.warning(`Attempt to get group with index ${index}, maximum is ${this.__groups.length - 1}`)
+            return null
+        }
+        return this.__groups[index.toString()]
     }
 
     /**
@@ -73,7 +79,7 @@ class GroupManager {
             const exists = this.getGroupByName(i)
             if (exists === null) {
                 const g = new Group(i, this.__groups.length)
-                this.__groups.push(g)
+                this.__groups[g.id.toString()] = g
                 ret.push(g)
             }
             log.warning(`Attempt to create existing group ${i}`)

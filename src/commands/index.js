@@ -7,11 +7,13 @@
 'use strict'
 
 const groupManager = require('../groupManager')
+const exitCommand = require('./exitCommand')
 const helpCommand = require('./helpCommand')
 const GroupsCommand = require('./GroupsCommand')
 
 let commands = []
 
+commands.push(exitCommand)
 commands.push(helpCommand)
 commands.push(new GroupsCommand(groupManager))
 

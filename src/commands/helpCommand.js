@@ -22,7 +22,8 @@ class HelpCommand extends Command {
             '/join <groupName|groupId>\tJoin group\n' +
             '/leave <groupName|groupId>\tLeave group\n' +
             '/create <groupname>\t\tCreate new group\n' +
-            '/<groupId> <message>\t\tSend message into group\n')
+            '/<groupId> <message>\t\tSend message into group\n' +
+            '/exit\t\t\t\tExit application\n')
     }
 
 }

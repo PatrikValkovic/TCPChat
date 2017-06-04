@@ -37,12 +37,6 @@ module.exports = class Parser {
         }
 
 
-        else if (content.startsWith('/exit')) {
-            log.info('Client exiting')
-            client.socket.destroy()
-        }
-
-
         else if (content.startsWith('/joined')) {
             if (Object.keys(client.groups).length === 0) {
                 client.socket.write('You are not in any group\n')

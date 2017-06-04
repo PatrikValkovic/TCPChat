@@ -27,6 +27,7 @@ module.exports = class Client {
      */
     disconnect() {
         this.connected = false
+        this.socket.destroy()
     }
 
     /**

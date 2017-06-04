@@ -9,7 +9,7 @@
 const net = require('net')
 const log = require('./logger')
 const config = require('../config.json')
-const GroupManager = require('./GroupManager')
+const GroupManager = require('./groupManager')
 const Parser = require('./Parser')
 const Client = require('./Client')
 

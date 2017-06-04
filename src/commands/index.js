@@ -6,11 +6,14 @@
  */
 'use strict'
 
-const HelpCommand = require('./HelpCommand')
+const groupManager = require('../groupManager')
+const helpCommand = require('./helpCommand')
+const GroupsCommand = require('./GroupsCommand')
 
 let commands = []
 
-commands.push(HelpCommand)
+commands.push(helpCommand)
+commands.push(new GroupsCommand(groupManager))
 
 module.exports = function (client, content) {
 

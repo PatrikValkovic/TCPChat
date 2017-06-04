@@ -8,7 +8,7 @@
 
 const net = require('net')
 const log = require('./logger')
-const manager = require('./GroupManager')
+const manager = require('./groupManager')
 const process = require('./commands')
 
 /**
@@ -34,13 +34,6 @@ module.exports = class Parser {
 
         if(!process(client,content)){
             //TODO send to last group
-        }
-
-        if (content.startsWith('/groups')) {
-            client.socket.write('List of groups:\n')
-            const groups = this.manager.getGroupsNames()
-            for (let i = 0; i < groups.length; i++)
-                client.socket.write(`/${i} ${groups[i]}\n`)
         }
 
 

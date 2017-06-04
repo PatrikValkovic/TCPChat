@@ -13,16 +13,13 @@ const log = require('./logger')
  * GroupManager manages chat groups
  * @type {GroupManager}
  */
-module.exports = class GroupManager {
+class GroupManager {
 
     /**
      * Constructor
-     * @param {array} groups Array of groups, that should be created by default
      */
-    constructor(groups) {
+    constructor() {
         this.__groups = []
-        for (const i in groups)
-            this.__groups.push(new Group(groups[i], this.__groups.length))
     }
 
     /**
@@ -62,18 +59,28 @@ module.exports = class GroupManager {
 
     /**
      * Create new chat group
-     * @param {string} groupName Name of new chat group
-     * @returns {Group} Returns new group, if was group created.
+     * @param {string|Array} group Name of new chat group
+     * @returns {Array} Returns created group, if created.
      * In case that group with same name already exists, return existing instance of Group.
      */
-    createGroup(groupName) {
-        const exists = this.getGroupByName(groupName)
-        if (exists === null) {
-            const g = new Group(groupName, this.__groups.length)
-            this.__groups.push(g)
-            return g
+    createGroup(group) {
+        if(group instanceof String)
+            group = [group]
+
+        const ret = []
+
+        for (const i in group){
+            const exists = this.getGroupByName(group)
+            if (exists === null) {
+                const g = new Group(group, this.__groups.length)
+                this.__groups.push(g)
+                ret.push(g)
+            }
+            log.warning(`Attempt to create existing group ${group}`)
+            ret.push(exists)
         }
-        log.warning(`Attempt to create existing group ${groupName}`)
-        return exists
+        return ret
     }
 }
+
+module.exports = new GroupManager()

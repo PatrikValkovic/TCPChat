@@ -14,10 +14,10 @@ const Parser = require('./Parser')
 const Client = require('./Client')
 
 if (require.main === module) {
-    let counter = 10
-    const grpManager = new GroupManager(config.defaultGroups)
-    const parser = new Parser(grpManager)
+    GroupManager.createGroup(config.defaultGroups)
+    const parser = new Parser()
     const server = net.createServer()
+    let counter = 0
 
     server.on('connection', (socket) => {
         const client = new Client(socket, counter++)

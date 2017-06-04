@@ -8,6 +8,7 @@
 
 const net = require('net')
 const log = require('./logger')
+const manager = require('./GroupManager')
 const process = require('./commands')
 
 /**
@@ -19,9 +20,8 @@ module.exports = class Parser {
 
     /**
      * Constructor
-     * @param {GroupManager} manager Manager of groups
      */
-    constructor(manager) {
+    constructor() {
         this.manager = manager
     }
 

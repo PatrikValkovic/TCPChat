@@ -8,6 +8,7 @@
 
 const net = require('net')
 const log = require('./logger')
+const commands = require('./commands')
 
 /**
  * Parse user commands
@@ -30,6 +31,10 @@ module.exports = class Parser {
      * @param {string} content
      */
     parse(client, content) {
+
+        if(!commands.parse(client,content)){
+            //TODO send to last group
+        }
 
         if (content.startsWith('/groups')) {
             client.socket.write('List of groups:\n')

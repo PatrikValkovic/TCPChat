@@ -115,6 +115,18 @@ module.exports = class Parser {
             client.socket.write(`You are now in ${grp.name} group\n`)
         }
 
+        //help
+        else if(content.startsWith('/help')){
+            client.socket.write('HELP\n' +
+                '/setname\t\t\tSet your name\n' +
+                '/groups\t\t\t\tList of all groups\n' +
+                '/joined\t\t\t\tList of groups, that you are joined in\n' +
+                '/join <groupName|groupId>\tJoin group\n' +
+                '/leave <groupName|groupId>\tLeave group\n' +
+                '/create <groupname>\t\tCreate new group\n' +
+                '/<groupId> <message>\t\tSend message into group\n')
+        }
+
         //message
         else if (content.startsWith('/')) {
             const grpId = content.split(' ')[0].substr(1)

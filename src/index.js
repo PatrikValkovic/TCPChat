@@ -17,10 +17,9 @@ if (require.main === module) {
     GroupManager.createGroup(config.defaultGroups)
     const parser = new Parser()
     const server = net.createServer()
-    let counter = 0
 
     server.on('connection', (socket) => {
-        const client = new Client(socket, counter++)
+        const client = new Client(socket)
         log.info('Client connected')
         socket.on('close', () => {
             log.info('Socket ended')

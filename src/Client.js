@@ -13,8 +13,7 @@ let counter = 0
  * @type {Client}
  */
 module.exports = class Client {
-    constructor(socket, id) {
-        this.id = id
+    constructor(socket) {
         this.socket = socket
         this.name = 'anonymous'
         this.connected = true

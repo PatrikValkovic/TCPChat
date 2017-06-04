@@ -19,7 +19,7 @@ class GroupManager {
      * Constructor
      */
     constructor() {
-        this.__groups = []
+        this.__groups = {}
     }
 
     /**

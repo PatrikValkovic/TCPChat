@@ -6,6 +6,8 @@
  */
 'use strict'
 
+let counter = 0
+
 /**
  * Class that represent chat group
  * @type {Group}
@@ -17,10 +19,10 @@ module.exports = class Group {
      * @param {string} name Name of group
      * @param {int} index Short index for group
      */
-    constructor(name, index) {
+    constructor(name) {
         this.name = name
-        this.__clients = []
-        this.index = index
+        this.__clients = {}
+        this.id = counter++
     }
 
     /**

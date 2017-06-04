@@ -7,7 +7,7 @@
 'use strict'
 
 const Group = require('./Group')
-const log = require('../shared/logger')
+const log = require('./logger')
 
 /**
  * GroupManager manages chat groups

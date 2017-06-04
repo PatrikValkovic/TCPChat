@@ -7,7 +7,7 @@
 'use strict'
 
 const net = require('net')
-const log = require('../shared/logger')
+const log = require('./logger')
 const config = require('../config.json')
 const GroupManager = require('./GroupManager')
 const Parser = require('./Parser')

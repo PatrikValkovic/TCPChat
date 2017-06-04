@@ -7,7 +7,7 @@
 'use strict'
 
 const net = require('net')
-const log = require('../shared/logger')
+const log = require('./logger')
 
 /**
  * Parse user commands

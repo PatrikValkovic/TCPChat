@@ -69,14 +69,14 @@ class GroupManager {
 
         const ret = []
 
-        for (const i in group){
-            const exists = this.getGroupByName(group)
+        for (const i of group){
+            const exists = this.getGroupByName(i)
             if (exists === null) {
-                const g = new Group(group, this.__groups.length)
+                const g = new Group(i, this.__groups.length)
                 this.__groups.push(g)
                 ret.push(g)
             }
-            log.warning(`Attempt to create existing group ${group}`)
+            log.warning(`Attempt to create existing group ${i}`)
             ret.push(exists)
         }
         return ret

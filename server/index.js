@@ -26,13 +26,19 @@ if (require.main === module) {
             log.info('Socket ended')
             client.disconnect()
         })
-        socket.on('data', (cont) => {
-            parser.parse(client, cont.toString())
+        socket.once('data', (name) => {
+            client.name = name
+            socket.write('Welcome to chat, type /help for more help\n')
+            socket.on('data',(content) => {
+                parser.parse(client, content.toString())
+            })
         })
         socket.on('error', () => {
             log.warning('Error with socket')
             client.disconnect()
         })
+
+        socket.write('Please enter your name: ')
     })
 
     server.listen(config.port, config.host, () => {

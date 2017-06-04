@@ -8,7 +8,7 @@
 
 const net = require('net')
 const log = require('./logger')
-const commands = require('./commands')
+const process = require('./commands')
 
 /**
  * Parse user commands
@@ -32,7 +32,7 @@ module.exports = class Parser {
      */
     parse(client, content) {
 
-        if(!commands.parse(client,content)){
+        if(!process(client,content)){
             //TODO send to last group
         }
 
@@ -118,18 +118,6 @@ module.exports = class Parser {
             const grp = this.manager.createGroup(split[1].trim())
             grp.addClient(client)
             client.socket.write(`You are now in ${grp.name} group\n`)
-        }
-
-        //help
-        else if(content.startsWith('/help')){
-            client.socket.write('HELP\n' +
-                '/setname\t\t\tSet your name\n' +
-                '/groups\t\t\t\tList of all groups\n' +
-                '/joined\t\t\t\tList of groups, that you are joined in\n' +
-                '/join <groupName|groupId>\tJoin group\n' +
-                '/leave <groupName|groupId>\tLeave group\n' +
-                '/create <groupname>\t\tCreate new group\n' +
-                '/<groupId> <message>\t\tSend message into group\n')
         }
 
         //message

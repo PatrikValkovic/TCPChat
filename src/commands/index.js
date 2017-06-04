@@ -6,9 +6,11 @@
  */
 'use strict'
 
+const HelpCommand = require('./HelpCommand')
 
 let commands = []
 
+commands.push(HelpCommand)
 
 module.exports = function (client, content) {
 

@@ -33,17 +33,7 @@ module.exports = class Parser {
     parse(client, content) {
 
         if (!process(client, content)) {
-            //TODO send to last group
-        }
-        else {
-            client.socket.write('HELP\n' +
-                '/setname\t\t\tSet your name\n' +
-                '/groups\t\t\t\tList of all groups\n' +
-                '/joined\t\t\t\tList of groups, that you are joined in\n' +
-                '/join <groupName|groupId>\tJoin group\n' +
-                '/leave <groupName|groupId>\tLeave group\n' +
-                '/create <groupname>\t\tCreate new group\n' +
-                '/<groupId> <message>\t\tSend message into group\n')
+            //TODO failure
         }
     }
 }

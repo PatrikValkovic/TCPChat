@@ -32,31 +32,12 @@ module.exports = class Parser {
      */
     parse(client, content) {
 
-        if(!process(client,content)){
+        if (!process(client, content)) {
             //TODO send to last group
         }
 
 
-        if (content.startsWith('/join')) {
-            const split = content.split(' ')
-            if (split.length !== 2) {
-                client.socket.write('Invalid syntax: /join <groupName|groupId>\n')
-                return
-            }
-            const grp = isNaN(parseInt(split[1])) ?
-                this.manager.getGroupByName(split[1].trim()) :
-                this.manager.getGroupByIndex(parseInt(split[1]))
-            if (grp === null) {
-                client.socket.write('Non existing group, try /groups to list all groups\n')
-                return
-            }
-            grp.addClient(client)
-
-            client.socket.write(`Joined ${grp.name} group\n`)
-        }
-
-
-        else if (content.startsWith('/leave')) {
+        if (content.startsWith('/leave')) {
             const split = content.split(' ')
             if (split.length !== 2) {
                 client.socket.write('Invalid syntax: /leave <groupName|groupId>\n')

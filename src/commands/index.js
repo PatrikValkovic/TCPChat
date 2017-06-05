@@ -11,6 +11,7 @@ const ExitCommand = require('./ExitCommand')
 const HelpCommand = require('./HelpCommand')
 const GroupsCommand = require('./GroupsCommand')
 const JoinedCommand = require('./JoinedCommand')
+const SetNameCommand = require('./SetnameCommand')
 
 let commands = []
 
@@ -18,6 +19,7 @@ commands.push(new ExitCommand())
 commands.push(new HelpCommand())
 commands.push(new GroupsCommand(groupManager))
 commands.push(new JoinedCommand())
+commands.push(new SetNameCommand())
 
 module.exports = function (client, content) {
 

@@ -56,16 +56,6 @@ module.exports = class Parser {
         }
 
 
-        else if (content.startsWith('/setname')) {
-            const split = content.split(' ')
-            if (split.length !== 2) {
-                client.socket.write('Invalid syntax: /setname <yourName>\n')
-                return
-            }
-            client.name = split[1].trim()
-        }
-
-
         else if (content.startsWith('/leave')) {
             const split = content.split(' ')
             if (split.length !== 2) {

@@ -33,6 +33,14 @@ module.exports = class Client {
      * @returns {boolean} True if is user in group, false otherwise
      */
     isInGroup(name) {
-        return this.groups.hasOwnProperty(name)
+        for(const i of this.groups)
+            if(this.groups[i].name === name)
+                return true
+
+        return false
+    }
+
+    joinedGroups(){
+        return Object.assign({},this.groups)
     }
 }

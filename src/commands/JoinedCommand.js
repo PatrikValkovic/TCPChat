@@ -15,12 +15,12 @@ class JoinedCommands extends  Command {
     }
 
     process(client, content){
-        if (Object.keys(client.groups).length === 0) {
+        if (Object.keys(client.joinedGroups()).length === 0) {
             client.socket.write('You are not in any group\n')
             return
         }
         client.socket.write('List of groups\n')
-        for (const grp of Object.keys(client.groups))
+        for (const grp of Object.keys(client.joinedGroups()))
             client.socket.write(`/${grp} ${client.groups[grp].name}\n`)
     }
 

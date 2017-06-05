@@ -37,18 +37,7 @@ module.exports = class Parser {
         }
 
 
-        if (content.startsWith('/joined')) {
-            if (Object.keys(client.groups).length === 0) {
-                client.socket.write('You are not in any group\n')
-                return
-            }
-            client.socket.write('List of groups\n')
-            for (const grp in client.groups)
-                client.socket.write(`/${client.groups[grp]} ${grp}\n`)
-        }
-
-
-        else if (content.startsWith('/join')) {
+        if (content.startsWith('/join')) {
             const split = content.split(' ')
             if (split.length !== 2) {
                 client.socket.write('Invalid syntax: /join <groupName|groupId>\n')

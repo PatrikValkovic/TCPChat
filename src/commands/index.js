@@ -10,12 +10,14 @@ const groupManager = require('../groupManager')
 const ExitCommand = require('./ExitCommand')
 const HelpCommand = require('./HelpCommand')
 const GroupsCommand = require('./GroupsCommand')
+const JoinedCommand = require('./JoinedCommand')
 
 let commands = []
 
 commands.push(new ExitCommand())
 commands.push(new HelpCommand())
 commands.push(new GroupsCommand(groupManager))
+commands.push(new JoinedCommand())
 
 module.exports = function (client, content) {
 

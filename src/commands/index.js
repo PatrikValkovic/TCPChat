@@ -14,6 +14,7 @@ const JoinedCommand = require('./JoinedCommand')
 const SetNameCommand = require('./SetnameCommand')
 const JoinCommand = require('./JoinCommand')
 const LeaveCommand = require('./LeaveCommand')
+const CreateCommand = require('./CreateCommand')
 
 let commands = []
 
@@ -24,6 +25,7 @@ commands.push(new JoinedCommand())
 commands.push(new SetNameCommand())
 commands.push(new JoinCommand(groupManager))
 commands.push(new LeaveCommand())
+commands.push(new CreateCommand(groupManager))
 
 
 module.exports = function (client, content) {

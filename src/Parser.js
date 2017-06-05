@@ -36,18 +36,6 @@ module.exports = class Parser {
             //TODO send to last group
         }
 
-
-        if (content.startsWith('/create')) {
-            const split = content.split(' ')
-            if (split.length !== 2) {
-                client.socket.write('Invalid syntax: /create <groupName>\n')
-                return
-            }
-            const grp = this.manager.createGroup(split[1].trim())
-            grp.addClient(client)
-            client.socket.write(`You are now in ${grp.name} group\n`)
-        }
-
         //message
         else if (content.startsWith('/')) {
             const grpId = content.split(' ')[0].substr(1)

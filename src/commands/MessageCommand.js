@@ -15,21 +15,17 @@ class MessageCommand extends Command {
     }
 
     process(client, content){
-        const grpId = content.split(' ')[0].substr(1)
-        if (isNaN(parseInt(grpId))) {
+        const split = content.split(' ')
+        if (split.length < 2 || isNaN(parseInt(split[0].substr(1)))) {
             client.socket.write('Invalid syntax "/<groupId> <message>"\n')
             return
         }
-        const grp = this.manager.getGroupByIndex(grpId)
+        const grp = client.groupById(parseInt(split[0].substr(1)))
         if (grp === null) {
             client.socket.write('Non existing group, try /joined command\n')
             return
         }
-        if (!client.isInGroup(grp.name)) {
-            client.socket.write(`You are not in ${grp.name} group\n`)
-            return
-        }
-        grp.send(client, content.substr(2 + grpId.toString().length))
+        grp.send(client, content.substr(2 + grp.id.toString().length))
     }
 
 }

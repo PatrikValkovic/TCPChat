@@ -35,25 +35,6 @@ module.exports = class Parser {
         if (!process(client, content)) {
             //TODO send to last group
         }
-
-        //message
-        else if (content.startsWith('/')) {
-            const grpId = content.split(' ')[0].substr(1)
-            if (isNaN(parseInt(grpId))) {
-                client.socket.write('Invalid syntax "/<groupId> <message>"\n')
-                return
-            }
-            const grp = this.manager.getGroupByIndex(grpId)
-            if (grp === null) {
-                client.socket.write('Non existing group, try /joined command\n')
-                return
-            }
-            if (!client.isInGroup(grp.name)) {
-                client.socket.write(`You are not in ${grp.name} group\n`)
-                return
-            }
-            grp.send(client, content.substr(2 + grpId.toString().length))
-        }
         else {
             client.socket.write('HELP\n' +
                 '/setname\t\t\tSet your name\n' +

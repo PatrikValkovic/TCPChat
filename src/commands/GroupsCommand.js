@@ -22,8 +22,8 @@ class GroupsCommand extends  Command {
     process(client, content){
         client.socket.write('List of groups:\n')
         const groups = this.grpManager.getGroupsNames()
-        for (let i = 0; i < groups.length; i++)
-            client.socket.write(`/${i} ${groups[i]}\n`)
+        for(const i of Object.keys(groups))
+            client.socket.write(`/${groups[i].id} ${groups[i].name}\n`)
     }
 
 }

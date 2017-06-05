@@ -24,17 +24,10 @@ class GroupManager {
 
     /**
      * Return array of chat group names
-     * @returns {Array}
+     * @returns {Object}
      */
     getGroupsNames() {
-        const arr = []
-        const gr = this.__groups
-        Object.keys(gr).forEach((k) => {
-            while(arr.length < gr[k].id)
-                arr.push(null)
-            arr[gr[k].id] = gr[k].name
-        })
-        return arr
+        return Object.assign({},this.__groups)
     }
 
     /**

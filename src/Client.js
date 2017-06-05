@@ -16,7 +16,6 @@ module.exports = class Client {
     constructor(socket) {
         this.socket = socket
         this.name = 'anonymous'
-        this.connected = true
         this.id = counter++
         this.groups = {}
     }
@@ -25,7 +24,6 @@ module.exports = class Client {
      * Disconnect client from server
      */
     disconnect() {
-        this.connected = false
         this.socket.destroy()
     }
 

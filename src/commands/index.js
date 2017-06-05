@@ -13,6 +13,7 @@ const GroupsCommand = require('./GroupsCommand')
 const JoinedCommand = require('./JoinedCommand')
 const SetNameCommand = require('./SetnameCommand')
 const JoinCommand = require('./JoinCommand')
+const LeaveCommand = require('./LeaveCommand')
 
 let commands = []
 
@@ -22,12 +23,16 @@ commands.push(new GroupsCommand(groupManager))
 commands.push(new JoinedCommand())
 commands.push(new SetNameCommand())
 commands.push(new JoinCommand(groupManager))
+commands.push(new LeaveCommand())
+
 
 module.exports = function (client, content) {
 
     for(let command of commands)
-        if(command.can(content))
-            return command.process(client,content)
+        if(command.can(content)) {
+            command.process(client, content)
+            return true
+        }
 
     return false
 }

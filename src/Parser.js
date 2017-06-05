@@ -37,26 +37,7 @@ module.exports = class Parser {
         }
 
 
-        if (content.startsWith('/leave')) {
-            const split = content.split(' ')
-            if (split.length !== 2) {
-                client.socket.write('Invalid syntax: /leave <groupName|groupId>\n')
-                return
-            }
-            const grp = isNaN(parseInt(split[1])) ?
-                this.manager.getGroupByName(split[1].trim()) :
-                this.manager.getGroupByIndex(parseInt(split[1]))
-            if (grp === null) {
-                client.socket.write('Non existing group, try /joined to list all joined groups\n')
-                return
-            }
-            if (grp.removeClient(client))
-                client.socket.write(`Leaved ${grp.name} group\n`)
-            else
-                client.socket.write(`You are not in ${grp.name} group\n`)
-        }
-
-        else if (content.startsWith('/create')) {
+        if (content.startsWith('/create')) {
             const split = content.split(' ')
             if (split.length !== 2) {
                 client.socket.write('Invalid syntax: /create <groupName>\n')

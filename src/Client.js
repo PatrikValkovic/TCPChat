@@ -18,6 +18,7 @@ module.exports = class Client {
         this.name = 'anonymous'
         this.id = counter++
         this.groups = {}
+        this.lastGroup = null
     }
 
     /**

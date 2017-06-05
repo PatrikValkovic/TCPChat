@@ -26,6 +26,7 @@ class MessageCommand extends Command {
             return
         }
         grp.send(client, content.substr(2 + grp.id.toString().length))
+        client.lastGroup = grp
     }
 
 }

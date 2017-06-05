@@ -7,6 +7,7 @@
 'use strict'
 
 const Command = require('./Command')
+const helpMessage = require('./helpMessage')
 
 class LastGroupMessageCommand extends Command {
 
@@ -15,7 +16,9 @@ class LastGroupMessageCommand extends Command {
     }
 
     process(client, content){
-
+        if(client.lastGroup !== null)
+            return client.lastGroup.send(client, content)
+        client.socket.write(helpMessage)
     }
 
 }

@@ -7,14 +7,14 @@
 'use strict'
 
 const groupManager = require('../groupManager')
-const exitCommand = require('./exitCommand')
-const helpCommand = require('./helpCommand')
+const ExitCommand = require('./ExitCommand')
+const HelpCommand = require('./HelpCommand')
 const GroupsCommand = require('./GroupsCommand')
 
 let commands = []
 
-commands.push(exitCommand)
-commands.push(helpCommand)
+commands.push(new ExitCommand())
+commands.push(new HelpCommand())
 commands.push(new GroupsCommand(groupManager))
 
 module.exports = function (client, content) {

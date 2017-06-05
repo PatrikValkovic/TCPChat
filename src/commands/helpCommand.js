@@ -28,4 +28,4 @@ class HelpCommand extends Command {
 
 }
 
-module.exports = new HelpCommand()
+module.exports = HelpCommand

@@ -20,4 +20,4 @@ class ExitCommand extends Command {
 
 }
 
-module.exports = new ExitCommand()
+module.exports = ExitCommand

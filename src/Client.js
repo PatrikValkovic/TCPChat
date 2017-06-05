@@ -41,7 +41,7 @@ module.exports = class Client {
     }
 
     groupByName(name){
-        for(const i of this.groups)
+        for(const i of Object.keys(this.groups))
             if(this.groups[i].name === name)
                 return this.groups[i]
 

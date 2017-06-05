@@ -23,12 +23,10 @@ class LeaveCommand extends  Command {
 
         split[1] = split[1].trim()
         let grp = null
-        if(isNaN(split[1]))
-            for(const p of client.groups)
-                if(client.groups[p].name === split[1])
-                    grp = client.groups[p]
+        if(isNaN(parseInt(split[1])))
+            grp = client.groupByName(split[1])
         else
-            grp = client.groups[split[1]] || null
+            grp = client.groupById(parseInt(split[1]))
 
         if (grp === null) {
             client.socket.write('Non existing group, try /joined to list all joined groups\n')

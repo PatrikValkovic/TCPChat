@@ -36,7 +36,7 @@ class GroupManager {
      * @returns {Group|null} Instance of Group, null if group does not exists
      */
     getGroupByName(name) {
-        for (let i in Object.keys(this.__groups))
+        for (let i of Object.keys(this.__groups))
             if (this.__groups[i].name === name)
                 return this.__groups[i]
         log.warning(`Attempt to access ${name} group`)

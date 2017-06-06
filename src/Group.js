@@ -6,6 +6,8 @@
  */
 'use strict'
 
+const log = require('./logger')
+
 let counter = 0
 
 /**
@@ -22,16 +24,19 @@ module.exports = class Group {
         this.name = name
         this.__clients = {}
         this.id = counter++
+        log.info(`Group ${this.name} with id ${this.id} created`)
     }
 
     /**
      * Add client into group
-     * @param {Client} client
+     * @param {Client} client Client to add
      */
     addClient(client) {
         this.__clients[client.id.toString()] = client
         client.groups[this.id.toString()] = this
+        log.info(`User ${client.id} add into group ${this.id}`)
     }
+
 
     /**
      * Remove client from group
@@ -39,11 +44,15 @@ module.exports = class Group {
      * @returns {boolean} True if was client removed, false otherwise
      */
     removeClient(client) {
-        if(this.__clients[client.id.toString()].id !== client.id)
+        log.info(`Attempt to remove client ${client.id} from group ${this.id}`)
+        if(this.__clients[client.id.toString()].id !== client.id){
+            log.warning(`User ${client.id} is not in group ${this.id}`)
             return false
+        }
 
         delete client.groups[this.id.toString()]
         delete this.__clients[client.id.toString()]
+        log.info(`User ${cliet.id} removed frou group ${this.id}`)
         return true;
     }
 
@@ -54,6 +63,7 @@ module.exports = class Group {
      */
     send(fromClient, message) {
         const mess = `[${this.name}]\t<${fromClient.name}>\t${message}`
+        log.info(`Message "${mess}" will be sent to group ${this.id}`)
 
         for (let i of Object.keys(this.__clients))
             if (this.__clients[i].id !== fromClient.id)

@@ -6,6 +6,8 @@
  */
 'use strict'
 
+const logger = require('./logger')
+
 let counter = 0
 
 /**
@@ -19,12 +21,14 @@ module.exports = class Client {
         this.id = counter++
         this.groups = {}
         this.lastGroup = null
+        logger.info(`User with ID ${this.id} created`)
     }
 
     /**
      * Disconnect client from server
      */
     disconnect() {
+        logger.info(`User ${this.name} with id ${this.id} disconnecteds`)
         this.socket.destroy()
     }
 
@@ -46,6 +50,7 @@ module.exports = class Client {
             if(this.groups[i].name === name)
                 return this.groups[i]
 
+        logger.warning(`Cannot find group ${name} for user ${this.id}`)
         return null
     }
 

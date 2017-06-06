@@ -22,7 +22,7 @@ module.exports = {
     },
 
     /**
-     * Log waring message
+     * Log warning message
      * @param {string} message
      */
     warning(message){

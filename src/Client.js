@@ -41,10 +41,19 @@ module.exports = class Client {
         return this.groupByName(name) !== null
     }
 
+    /**
+     * Get all groups, that user is joined in
+     * @returns {Object} Object, where key is ID of group
+     */
     joinedGroups(){
         return Object.assign({},this.groups)
     }
 
+    /**
+     * Find group for user
+     * @param {String} name Name of group to find
+     * @returns {Group|null} Instance of group if user is in that group, null otherwise
+     */
     groupByName(name){
         for(const i of Object.keys(this.groups))
             if(this.groups[i].name === name)
@@ -54,6 +63,11 @@ module.exports = class Client {
         return null
     }
 
+    /**
+     * Find group for user
+     * @param {Number} id ID of group
+     * @returns {Group|null} Instance of group if user is in that group, null otherwise
+     */
     groupById(id){
         return this.groups[id.toString()] || null
     }

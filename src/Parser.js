@@ -32,7 +32,7 @@ module.exports = class Parser {
      */
     parse(client, content) {
 
-        log.info(`Obtain: ${content} from user ${client.id}`)
+        log.info(`Obtain: ${content.trim()} from user ${client.id}`)
 
         if (!process(client, content)) {
             client.socket.write('Invalid syntax, try /help or more info')

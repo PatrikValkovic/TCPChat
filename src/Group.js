@@ -52,7 +52,7 @@ module.exports = class Group {
 
         delete client.groups[this.id.toString()]
         delete this.__clients[client.id.toString()]
-        log.info(`User ${cliet.id} removed frou group ${this.id}`)
+        log.info(`User ${client.id} removed frou group ${this.id}`)
         return true;
     }
 
@@ -63,7 +63,7 @@ module.exports = class Group {
      */
     send(fromClient, message) {
         const mess = `[${this.name}]\t<${fromClient.name}>\t${message}`
-        log.info(`Message "${mess}" will be sent to group ${this.id}`)
+        log.info(`Message "${mess.trim()}" will be sent to group ${this.id}`)
 
         for (let i of Object.keys(this.__clients))
             if (this.__clients[i].id !== fromClient.id)

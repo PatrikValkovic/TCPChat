@@ -39,7 +39,7 @@ class GroupManager {
         for (let i of Object.keys(this.__groups))
             if (this.__groups[i].name === name)
                 return this.__groups[i]
-        log.warning(`Attempt to access ${name} group`)
+        log.warning(`Attempt to access ${name} group that doesn't exist`)
         return null
     }
 
@@ -50,7 +50,7 @@ class GroupManager {
      */
     getGroupByIndex(index) {
         if (!this.__groups.hasOwnProperty(index.toString())){
-            log.warning(`Attempt to get group with index ${index} that doesn't exists`)
+            log.warning(`Attempt to get group with index ${index} that doesn't exist`)
             return null
         }
         return this.__groups[index.toString()]

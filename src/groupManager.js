@@ -20,6 +20,7 @@ class GroupManager {
      */
     constructor() {
         this.__groups = {}
+        this.width = 0
     }
 
     /**
@@ -66,6 +67,7 @@ class GroupManager {
         if(group instanceof String)
             group = [group]
 
+        /** @var {Group[]} */
         const ret = []
 
         for (const i of group){
@@ -76,10 +78,16 @@ class GroupManager {
                 log.info(`Group ${i} created`)
                 this.__groups[g.id.toString()] = g
                 ret.push(g)
+                continue
             }
             log.warning(`Attempt to create existing group ${i}`)
             ret.push(exists)
         }
+
+        this.width = ret.map(g => g.name.length).reduce((l,r)=>{
+            return Math.max(l,r) //TODO why direct usage if Math.max does not work?
+        },this.width)
+
         return ret
     }
 }

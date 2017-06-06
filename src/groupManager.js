@@ -6,6 +6,7 @@
  */
 'use strict'
 
+const util = require('util')
 const Group = require('./Group')
 const log = require('./logger')
 
@@ -64,7 +65,7 @@ class GroupManager {
      * In case that group with same name already exists, return existing instance of Group.
      */
     createGroup(group) {
-        if(group instanceof String)
+        if( typeof group === 'string')
             group = [group]
 
         /** @var {Group[]} */

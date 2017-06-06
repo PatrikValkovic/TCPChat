@@ -10,6 +10,11 @@ const Command = require('./Command')
 
 class MessageCommand extends Command {
 
+    constructor(manager){
+        super()
+        this.manager = manager
+    }
+
     can(content){
         return content.startsWith('/')
     }
@@ -25,7 +30,7 @@ class MessageCommand extends Command {
             client.socket.write('Non existing group, try /joined command\n')
             return
         }
-        grp.send(client, content.substr(2 + grp.id.toString().length))
+        grp.send(client, content.substr(2 + grp.id.toString().length), this.manager.width)
         client.lastGroup = grp
     }
 

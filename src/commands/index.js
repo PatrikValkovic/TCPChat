@@ -28,8 +28,8 @@ commands.push(new SetNameCommand())
 commands.push(new JoinCommand(groupManager))
 commands.push(new LeaveCommand())
 commands.push(new CreateCommand(groupManager))
-commands.push(new MessageCommand())
-commands.push(new LastGroupMessageCommand())
+commands.push(new MessageCommand(groupManager))
+commands.push(new LastGroupMessageCommand(groupManager))
 
 
 module.exports = function (client, content) {

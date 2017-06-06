@@ -19,8 +19,8 @@ if (require.main === module) {
     const server = net.createServer()
 
     server.on('connection', (socket) => {
+        log.info('New socket connected')
         const client = new Client(socket)
-        log.info('Client connected')
         socket.on('close', () => {
             log.info('Socket ended')
             client.disconnect()
@@ -28,13 +28,15 @@ if (require.main === module) {
         socket.once('data', (name) => {
             let obtainedName = name.toString().trim()
             client.name = obtainedName === '' ? 'anonymous' : obtainedName
+            log.info(`Set name ${client.name} for user ${client.id}`)
             socket.write('Welcome to chat, type /help for more help\n')
             socket.on('data',(content) => {
                 parser.parse(client, content.toString())
             })
         })
-        socket.on('error', () => {
+        socket.on('error', (e) => {
             log.warning('Error with socket')
+            log.warning(e.toString())
             client.disconnect()
         })
 

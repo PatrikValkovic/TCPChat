@@ -4,8 +4,8 @@ Simple implementation of Chat server using just NodeJS `net` library.
 
 Host and port can be configured in `config.json` file.
 
-Run using `node src` command.
-Client can connect with simple telnet.
+Run using `node src` command.  
+Client can connect with telnet.
 
 Application support messages and separate chat groups.
 

@@ -50,7 +50,7 @@ class GroupManager {
      */
     getGroupByIndex(index) {
         if (!this.__groups.hasOwnProperty(index.toString())){
-            log.warning(`Attempt to get group with index ${index}, maximum is ${this.__groups.length - 1}`)
+            log.warning(`Attempt to get group with index ${index} that doesn't exists`)
             return null
         }
         return this.__groups[index.toString()]
@@ -69,9 +69,11 @@ class GroupManager {
         const ret = []
 
         for (const i of group){
+            log.info(`Attemp to create group ${i}`)
             const exists = this.getGroupByName(i)
             if (exists === null) {
                 const g = new Group(i, this.__groups.length)
+                log.info(`Group ${i} created`)
                 this.__groups[g.id.toString()] = g
                 ret.push(g)
             }

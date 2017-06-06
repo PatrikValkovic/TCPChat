@@ -29,6 +29,9 @@ module.exports = class Client {
      */
     disconnect() {
         logger.info(`User ${this.name} with id ${this.id} disconnecteds`)
+        for(const grp of Object.keys(this.groups))
+            this.groups[grp].removeClient(this)
+        
         this.socket.destroy()
     }
 

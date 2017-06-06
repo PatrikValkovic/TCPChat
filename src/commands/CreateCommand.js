@@ -27,7 +27,7 @@ class CreateCommand extends  Command {
         }
         const grp = this.manager.createGroup(split[1].trim())
         grp[0].addClient(client)
-        client.socket.write(`Group ${grp[0].name} width id ${grp[0].id}creatgite and you are in\n`)
+        client.socket.write(`Group ${grp[0].name} with id ${grp[0].id} create and you are in\n`)
     }
 
 }

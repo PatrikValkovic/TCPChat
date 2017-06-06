@@ -26,7 +26,8 @@ if (require.main === module) {
             client.disconnect()
         })
         socket.once('data', (name) => {
-            client.name = name.toString().trim()
+            let obtainedName = name.toString().trim()
+            client.name = obtainedName === '' ? 'anonymous' : obtainedName
             socket.write('Welcome to chat, type /help for more help\n')
             socket.on('data',(content) => {
                 parser.parse(client, content.toString())

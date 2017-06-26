@@ -63,7 +63,7 @@ module.exports = class Group {
      * @param {Number} width Width of space for groups
      */
     send(fromClient, message, width) {
-        const grpName = `${this.name}]` + (new Array(width-this.name.length).fill(' ').join(''))
+        const grpName = `${this.name}]`  // + (new Array(width-this.name.length).fill(' ').join(''))
         const mess = `[${grpName}<${fromClient.name}>\t${message}`
         log.info(`Message "${mess.trim()}" will be sent to group ${this.id}`)
 

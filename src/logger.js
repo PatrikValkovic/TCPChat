@@ -18,7 +18,7 @@ module.exports = {
      * @param {string} message
      */
     info(message){
-        console.info(`${now()}\tINFO: ${message}`)
+        //console.info(`${now()}\tINFO: ${message}`)
     },
 
     /**

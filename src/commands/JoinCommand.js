@@ -33,6 +33,7 @@ class JoinCommand extends  Command {
             return
         }
         grp.addClient(client)
+        client.lastGroup = grp
 
         client.socket.write(`Joined ${grp.name} group\n`)
     }

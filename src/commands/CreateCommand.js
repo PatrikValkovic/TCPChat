@@ -25,8 +25,11 @@ class CreateCommand extends  Command {
             client.socket.write('Invalid syntax: /create <groupName>\n')
             return
         }
+
         const grp = this.manager.createGroup(split[1].trim())
         grp[0].addClient(client)
+        client.lastGroup = grp[0]
+
         client.socket.write(`Group ${grp[0].name} with id ${grp[0].id} create and you are in\n`)
     }
 

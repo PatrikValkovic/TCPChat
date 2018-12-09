@@ -14,4 +14,5 @@ module.exports = 'HELP\n' +
     '/leave <groupName|groupId>\tLeave group\n' +
     '/create <groupname>\t\tCreate new group\n' +
     '/<groupId> <message>\t\tSend message into group\n' +
-    '/exit\t\t\t\tExit application\n'
+    '/exit\t\t\t\tExit application\n' +
+    '/history\t\t\tGet messages in your current channel\n'

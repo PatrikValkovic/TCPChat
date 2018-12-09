@@ -17,7 +17,7 @@ const LeaveCommand = require('./LeaveCommand')
 const CreateCommand = require('./CreateCommand')
 const MessageCommand = require('./MessageCommand')
 const LastGroupMessageCommand = require('./LastGroupMessageCommand')
-
+const HistoryCommand = require('./HistoryCommand')
 let commands = []
 
 commands.push(new ExitCommand())
@@ -28,6 +28,7 @@ commands.push(new SetNameCommand())
 commands.push(new JoinCommand(groupManager))
 commands.push(new LeaveCommand())
 commands.push(new CreateCommand(groupManager))
+commands.push(new HistoryCommand(groupManager))
 commands.push(new MessageCommand(groupManager))
 commands.push(new LastGroupMessageCommand(groupManager))
 

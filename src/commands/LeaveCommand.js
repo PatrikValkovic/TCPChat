@@ -32,8 +32,10 @@ class LeaveCommand extends  Command {
             client.socket.write('Non existing group, try /joined to list all joined groups\n')
             return
         }
-        if (grp.removeClient(client))
+        if (grp.removeClient(client)) {
+            client.lastGroup = null
             client.socket.write(`Leaved ${grp.name} group\n`)
+        }
         else
             client.socket.write(`You are not in ${grp.name} group\n`)
     }

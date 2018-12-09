@@ -6,6 +6,8 @@
  */
 'use strict'
 
+const fs = require('fs')
+const config = require('../config.json')
 const log = require('./logger')
 
 let counter = 0
@@ -22,8 +24,11 @@ module.exports = class Group {
      */
     constructor(name) {
         this.name = name
-        this.__clients = {}
         this.id = counter++
+
+        this.__clients = {}
+        this.__filepath = `${config.storage}group_${this.id}.txt`
+
         log.info(`Group ${this.name} with id ${this.id} created`)
     }
 
@@ -67,8 +72,24 @@ module.exports = class Group {
         const mess = `[${grpName}<${fromClient.name}>\t${message}`
         log.info(`Message "${mess.trim()}" will be sent to group ${this.id}`)
 
+        log.info(`Storing message into the file`)
+        fs.appendFile(this.__filepath, mess, (err) => {
+            if(err)
+                log.warning(`Can\' append message for the group ${this.name}`)
+        })
+
         for (let i of Object.keys(this.__clients))
             if (this.__clients[i].id !== fromClient.id)
                 this.__clients[i].socket.write(mess)
+    }
+
+    history(toClient, width) {
+        fs.readFile(this.__filepath, function(err, data){
+            if(err){
+                log.warning(`Error in ${this.name} group history command`)
+                return
+            }
+            toClient.socket.write(data)
+        })
     }
 }
